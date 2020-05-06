@@ -1,5 +1,3 @@
-using System.Linq;
-
 namespace Part1
 {
     public class Numbers
@@ -7,7 +5,9 @@ namespace Part1
         public int Sum(int x)
         {
             
-            // For smaller numbers, this could be done using only variables. Pseudocode below:
+            // For smaller numbers, this could be done using variables by dividing
+            // the place in the decimal system with the corresponding unit value. E.g. 21 / 10 = 2.1
+            // The remainder gives the next value. Pseudocode below:
             
             // sumOfHundreds = x / 100
             // remainderOfHundreds = x % 100
