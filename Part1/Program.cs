@@ -6,10 +6,10 @@ namespace Part1
     {
         static void Main(string[] args)
         {
-            Numbers numbers = new Numbers();
-            Console.WriteLine(numbers.Sum(4075));
-            Console.WriteLine(numbers.Sum(3));
-            Console.WriteLine(numbers.Sum(999999999));
+            Substrings subs = new Substrings();
+            subs.Calculate("aybabtu", "bab"); // 1
+            subs.Calculate("aaaaa", "aa"); // 4
+            subs.Calculate("monkey", "banana"); // 0
         }
     }
 }
