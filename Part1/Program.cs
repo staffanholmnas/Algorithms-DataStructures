@@ -7,9 +7,9 @@ namespace Part1
         static void Main(string[] args)
         {
             Substrings subs = new Substrings();
-            subs.Calculate("aybabtu", "bab"); // 1
-            subs.Calculate("aaaaa", "aa"); // 4
-            subs.Calculate("monkey", "banana"); // 0
+            Console.WriteLine(subs.Calculate("aybabtu", "bab")); // 1
+            Console.WriteLine(subs.Calculate("aaaaa", "aa")); // 4
+            Console.WriteLine(subs.Calculate("monkey", "banana")); // 0
         }
     }
 }
