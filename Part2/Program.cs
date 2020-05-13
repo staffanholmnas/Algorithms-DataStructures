@@ -10,9 +10,9 @@ namespace Part2
 
             string randomNumber = finder.CreateInput(10);
 
+            Console.WriteLine(randomNumber);
             Console.WriteLine(finder.algo1(randomNumber));
             Console.WriteLine(finder.algo2(randomNumber));
         }
-        
     }
 }

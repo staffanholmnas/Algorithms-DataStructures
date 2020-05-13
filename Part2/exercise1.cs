@@ -10,6 +10,7 @@ namespace Part2
 
             string randomNumber = finder.CreateInput(10);
 
+            Console.WriteLine(randomNumber);
             Console.WriteLine(finder.algo1(randomNumber));
             Console.WriteLine(finder.algo2(randomNumber));*/
         public int algo1(string a)
@@ -20,20 +21,21 @@ namespace Part2
 
             int sum = 0;
             
-            for (int i = 0; i <= a.Length -1; i++)
+            for (int i = 0; i <= a.Length - 1; i++)
             {
                 for (int j = i + 1; j <= a.Length - 1; j++)
                 {
                     if (a[i].ToString() == "0" && a[j].ToString() == "1")
                     {
-                        sum += 1;
+                        sum++;
                     }
                 }
             }
 
             DateTime end = DateTime.Now;
             Console.WriteLine("Time this took: " + end.Subtract(start));
-            Console.WriteLine("Time elapsed: " + (end.Ticks - start.Ticks) / 10000.0 + " milliseconds");
+            Console.WriteLine("Time elapsed in ms: " + (end.Ticks - start.Ticks)/10000.0 + " milliseconds");
+
             return sum;
         }
 
@@ -60,7 +62,8 @@ namespace Part2
 
             DateTime end = DateTime.Now;
             Console.WriteLine("Time this took: " + end.Subtract(start));
-            Console.WriteLine("Time elapsed: " + (end.Ticks - start.Ticks) / 10000.0 + " milliseconds");
+            Console.WriteLine("Time elapsed in ms: " + (end.Ticks - start.Ticks)/10000.0 + " milliseconds");
+
             return sum;
         }
         public string CreateInput(int n)
