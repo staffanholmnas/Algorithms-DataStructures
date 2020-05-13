@@ -6,13 +6,10 @@ namespace Part2
     {
         static void Main(string[] args)
         {
-            algoCompare finder = new algoCompare();
-
-            string randomNumber = finder.CreateInput(10);
-
-            Console.WriteLine(randomNumber);
-            Console.WriteLine(finder.algo1(randomNumber));
-            Console.WriteLine(finder.algo2(randomNumber));
+            LongestRepetition p = new LongestRepetition();
+            Console.WriteLine(p.Calculate(new int[] { 1, 2, 1, 1, 2 })); // 2
+            Console.WriteLine(p.Calculate(new int[] { 1, 2, 3, 4, 5 })); // 1
+            Console.WriteLine(p.Calculate(new int[] { 1, 1, 1, 1, 1 })); // 5
         }
     }
 }
