@@ -9,6 +9,7 @@ namespace Part2
 
             for (int i = 1; i <= t.Length - 1; i++)
             {
+                // If the number checked is the same as the one before, next time check one more number.
                 if (t[i] == t[i - increaseIfRepeating])
                 {
 
