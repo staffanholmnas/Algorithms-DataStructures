@@ -5,14 +5,14 @@ namespace Part2
         public int Calculate(int[] t)
         {
             int sum = 1;
-            int number = 1;
+            int increaseIfRepeating = 1;
 
             for (int i = 1; i <= t.Length - 1; i++)
             {
-                if (t[i] == t[i - number])
+                if (t[i] == t[i - increaseIfRepeating])
                 {
 
-                    number++;
+                    increaseIfRepeating++;
                     sum += 1;
                 }
             }
