@@ -20,7 +20,7 @@ namespace Part2
                 }
             }
 
-            // Add sums from the right to subArray2.
+            // Add sums on the right to subArray2.
             for (int i = t.Length - 1; i >= 0; i--)
             {
                 sumRight += t[i];
