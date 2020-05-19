@@ -6,10 +6,11 @@ namespace Part2
     {
         static void Main(string[] args)
         {
-            Split s = new Split();
-            Console.WriteLine(s.Calculate(new int[] { 1, 2, -1, 4, 0 })); // 1
-            Console.WriteLine(s.Calculate(new int[] { 1, 2, 3, 4, 5 })); // 0
-            Console.WriteLine(s.Calculate(new int[] { 0, 0, 0, 0, 0 })); // 4
+            Changes m = new Changes();
+            Console.WriteLine(m.Calculate(new int[] { 1, 1, 2, 2, 2 })); // 2
+            Console.WriteLine(m.Calculate(new int[] { 1, 2, 3, 4, 5 })); // 0
+            Console.WriteLine(m.Calculate(new int[] { 1, 1, 1, 1, 1 })); // 2
+            Console.WriteLine(m.Calculate(new int[] { 0, 0, 0, 0, 0 })); // 2
         }
     }
 }
