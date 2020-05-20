@@ -6,11 +6,13 @@ namespace Part3
     {
         static void Main(string[] args)
         {
-            SmallestDifference s = new SmallestDifference();
-            Console.WriteLine(s.Calculate(new int[] { 4, 1, 8, 5 })); // 1
-            Console.WriteLine(s.Calculate(new int[] { 1, 10, 100 })); // 9
-            Console.WriteLine(s.Calculate(new int[] { 1, 1, 1, 1, 1 })); // 0
-            Console.WriteLine(s.Calculate(Randomizer(10))); // depends on random
+            Sorting s = new Sorting();
+            int[] sortMe = Randomizer(5);
+            int[] sortMeLarge = Randomizer(1000000);
+            s.QuickSort(sortMe);
+            s.MergeSort(sortMe);
+          //  s.QuickSort(sortMeLarge);
+          //  s.MergeSort(sortMeLarge);
         }
         public static int[] Randomizer(int n)
         {
