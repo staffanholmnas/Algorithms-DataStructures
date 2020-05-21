@@ -7,10 +7,11 @@ namespace Part3
         static void Main(string[] args)
         {
             Sorting s = new Sorting();
-            int[] sortMe = Randomizer(5);
+            int[] sortMe = Randomizer(4);
             int[] sortMeLarge = Randomizer(1000000);
-            s.QuickSort(sortMe);
-            s.MergeSort(sortMe);
+            int[] example = new int[] {5,1,2,9};
+            s.QuickSort(example);
+          //  s.MergeSort(example);
           //  s.QuickSort(sortMeLarge);
           //  s.MergeSort(sortMeLarge);
         }
