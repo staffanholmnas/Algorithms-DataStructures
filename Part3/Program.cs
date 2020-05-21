@@ -6,6 +6,7 @@ namespace Part3
     {
         static void Main(string[] args)
         {
+            /*
             Sorting s = new Sorting();
             int[] sortMe = Randomizer(4);
             int[] sortMeLarge = Randomizer(1000000);
@@ -13,7 +14,15 @@ namespace Part3
             s.QuickSort(example);
           //  s.MergeSort(example);
           //  s.QuickSort(sortMeLarge);
-          //  s.MergeSort(sortMeLarge);
+          //  s.MergeSort(sortMeLarge);*/
+            BinarySearch b = new BinarySearch();
+            int[] example = new int[] { 4, 1, 8, 5 };
+            Console.WriteLine(b.Find(new int[] { 4, 1, 8, 5 }, 2)); // false
+            Console.WriteLine(b.Find(new int[] { 0, 0 }, 0)); // true
+            Console.WriteLine(b.Find(new int[] { 4, 1, 8, 5, 8, 7, 4, 2, 3 }, 2)); // true
+            Console.WriteLine(b.Find(new int[] { 0 }, 0)); // true
+            Console.WriteLine(b.Find(Randomizer(100000), 3)); // ?
+
         }
         public static int[] Randomizer(int n)
         {
