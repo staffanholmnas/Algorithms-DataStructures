@@ -6,12 +6,12 @@ namespace Part3
     {
         static void Main(string[] args)
         {
-            BinarySearch b = new BinarySearch();
-            Console.WriteLine(b.Find(new int[] { 4, 1, 8, 5 }, 2)); // false
-            Console.WriteLine(b.Find(new int[] { 0, 0 }, 0)); // true
-            Console.WriteLine(b.Find(new int[] { 4, 1, 8, 5, 8, 7, 4, 2, 3 }, 2)); // true
-            Console.WriteLine(b.Find(new int[] { 0 }, 0)); // true
-            Console.WriteLine(b.Find(Randomizer(100000), 3)); // Most likely true
+            Inversions inv = new Inversions();
+            int[] t = inv.Create(10, 60);
+            foreach (int i in t)
+            {
+                Console.Write(i + " ");  // 2 1 3 5 4
+            }
         }
         public static int[] Randomizer(int n)
         {
