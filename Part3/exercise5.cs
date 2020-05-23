@@ -11,41 +11,30 @@ namespace Part3
                 int[] b = new int[0];
                 return b;
             }
-            
+
             int[] a = new int[n];
+            int maxInversions = Sum(n - 1); // Example: max inversions for n = 4 is 3 + 2 + 1 = 6.
 
             for (int i = 0; i <= a.Length - 1; i++)
             {
                 a[i] = i + 1;
             }
+
             if (k <= 0)
             {
                 return a;
             }
-            if (k >= Sum(n - 1))
+
+            if (k >= maxInversions)
             {
-                Console.WriteLine("Max number of inversions for n = " + n + " is " + Sum(n - 1));
-                Array.Reverse(a);
+                Console.WriteLine("Max number of inversions for n = " + n + " is " + maxInversions);
+                GetInversions(a, maxInversions);
                 return a;
             }
+
             else
             {
-                int indexReducer = 2;
-                int index = 0;
-                int inversions = 0;
-
-                while (inversions <= k - 1)
-                {
-                    Swapper(a, index);
-                    if (index == a.Length - indexReducer)
-                    {
-                        index = -1;
-                        indexReducer++;
-                    }
-
-                    index++;
-                    inversions++;
-                }
+                GetInversions(a, k);
                 return a;
             }
         }
@@ -60,6 +49,27 @@ namespace Part3
             int swapper = a[j];
             a[j] = a[j + 1];
             a[j + 1] = swapper;
+            return a;
+        }
+        public int[] GetInversions(int[] a, int k)
+        {
+            int indexReducer = 2;
+            int index = 0;
+            int inversions = 0;
+
+            while (inversions <= k - 1)
+            {
+                Swapper(a, index);
+
+                // When the end is reached the index is reset and lenght is reduced, so next time loop one number less.
+                if (index == a.Length - indexReducer)
+                {
+                    index = -1;
+                    indexReducer++;
+                }
+                index++;
+                inversions++;
+            }
             return a;
         }
     }
