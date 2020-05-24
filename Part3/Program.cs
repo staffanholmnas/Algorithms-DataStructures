@@ -6,12 +6,13 @@ namespace Part3
     {
         static void Main(string[] args)
         {
-            Inversions inv = new Inversions();
-            int[] t = inv.Create(4, 6);
-            foreach (int i in t)
-            {
-                Console.Write(i + " ");  // 2 1 3 5 4
-            }
+            Sorting s = new Sorting();
+            int[] sortMe = Randomizer(100);
+            int[] sortMeLarge = Randomizer(1000000);
+            //s.QuickSort(sortMe);
+            s.MergeSort(sortMe);
+            //s.QuickSort(sortMeLarge);
+            s.MergeSort(sortMeLarge);
         }
         public static int[] Randomizer(int n)
         {

@@ -8,17 +8,10 @@ namespace Part3
         {
             DateTime start = DateTime.Now;
 
-            foreach (var item in t)
-            {
-                Console.WriteLine(item);
-            }
+            int[] sortedArray = new int[t.Length];
 
-            SortM(t);
+            sortedArray = SortM(t);
 
-            foreach (var item in t)
-            {
-                Console.WriteLine(item);
-            }
             DateTime end = DateTime.Now;
             Console.WriteLine("Time this took: " + end.Subtract(start));
         }
@@ -31,7 +24,7 @@ namespace Part3
             {
                 Console.WriteLine(item);
             }
-            
+
             Console.WriteLine("---");
             SortQ(t);
             Console.WriteLine("---");
@@ -54,7 +47,6 @@ namespace Part3
 
             if (t.Length == 1)
             {
-                
                 return t;
             }
 
@@ -69,47 +61,41 @@ namespace Part3
                     array2[i - k] = t[i];
                 }
             }
-           
-            SortM(array1);
-            SortM(array2);
-    
-           return Merge(array1, array2);
-         
-            
+
+            array1 = SortM(array1);
+            array2 = SortM(array2);
+
+            return Merge(array1, array2);
         }
 
         public int[] Merge(int[] a, int[] b)
         {
-            Console.WriteLine("---");
-            foreach (var item in a)
-            {
-                Console.WriteLine(item);
-            }
-            Console.WriteLine("///");
-            foreach (var item in b)
-            {
-                Console.WriteLine(item);
-            }
-            Console.WriteLine("+++");
             int[] c = new int[a.Length + b.Length];
-            for (int i = 0; i <= a.Length - 1; i++)
+            int[] helper = new int[a.Length + b.Length];
+            int a1 = 0;
+            int b1 = a.Length - 1;
+            int a2 = 0;
+            int b2 = b.Length - 1;
+            int a1b2 = a.Length + b.Length;
+
+            for (int i = 0; i <= a1b2 - 1; i++)
             {
-                if (a[i] <= b[i])
+                if (a2 > b2 || (a1 <= b1 && a[a1] <= b[a2]))
                 {
-                    c[i] = a[i];
-                    c[i + 1] = b[i];
+                    helper[i] = a[a1];
+                    a1++;
                 }
                 else
                 {
-                    c[i] = b[i];
-                    c[i + 1] = a[i];
+                    helper[i] = b[a2];
+                    a2++;
                 }
-               
             }
-             foreach (var item in c)
-                {
-                    Console.WriteLine(item);
-                }
+
+            for (int i = 0; i <= c.Length - 1; i++)
+            {
+                c[i] = helper[i];
+            }
 
             return c;
         }
@@ -121,8 +107,8 @@ namespace Part3
                 return t;
             }
             int k = Pivot(t);
-            int[] a = new int [k];
-            int[] b = new int [t.Length - k];
+            int[] a = new int[k];
+            int[] b = new int[t.Length - k];
             SortQ(a);
             SortQ(b);
 
@@ -159,3 +145,21 @@ namespace Part3
                 c[i] = helper[i];
             }
 */
+
+
+/*
+            for (int i = 0; i <= a.Length - 1; i++)
+            {
+                if (a[i] <= b[i])
+                {
+                    c[i] = a[i];
+                    c[i + 1] = b[i];
+                }
+                else
+                {
+                    c[i] = b[i];
+                    c[i + 1] = a[i];
+                }
+
+            }
+            */
