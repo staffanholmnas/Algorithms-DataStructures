@@ -20,18 +20,7 @@ namespace Part3
         {
             DateTime start = DateTime.Now;
 
-            foreach (var item in t)
-            {
-                Console.WriteLine(item);
-            }
-
-            Console.WriteLine("---");
-            SortQ(t);
-            Console.WriteLine("---");
-            foreach (var item in t)
-            {
-                Console.WriteLine(item);
-            }
+            SortQ(t, 0, t.Length - 1);
 
             DateTime end = DateTime.Now;
             Console.WriteLine("Time this took: " + end.Subtract(start));
@@ -100,66 +89,39 @@ namespace Part3
             return c;
         }
 
-        public int[] SortQ(int[] t)
+        public void SortQ(int[] t, int a, int b)
         {
-            if (t[0] >= t[t.Length - 1])
+            if (a >= b)
             {
-                return t;
+                return;
             }
-            int k = Pivot(t);
-            int[] a = new int[k];
-            int[] b = new int[t.Length - k];
-            SortQ(a);
-            SortQ(b);
 
-            return t;
+            int k = Pivot(t, a, b);
+
+            SortQ(t, a, k - 1);
+            SortQ(t, k + 1, b);
         }
-        public int Pivot(int[] t)
+        public int Pivot(int[] t, int a, int b)
         {
-            int k = 0;
+            int k = a;
+            for (int i = a + 1; i <= b; i++)
+            {
+                if (t[i] < t[a])
+                {
+                    k++;
+                    Swapper(t, i, k);
+                }
+            }
+
+            Swapper(t, a, k);
             return k;
+        }
+        public int[] Swapper(int[] a, int j, int l)
+        {
+            int swapper = a[j];
+            a[j] = a[l];
+            a[l] = swapper;
+            return a;
         }
     }
 }
-
-/*
-            int j = 0;
-            int k = 0;
-            int[] c = new int[a.Length + b.Length];
-            int[] helper = new int[a.Length + b.Length];
-            for (int i = 0; i <= c.Length - 1; i++)
-            {
-                if (b[0] > b[b.Length - 1] || ((a[0]) <= a[a.Length - 1]) && (c[a[0]] <= c[b[0]]))
-                {
-                    helper[i] = a[j];
-                    j++;
-                }
-                else
-                {
-                    helper[i] = b[k];
-                    k++;
-                }
-            }
-            for (int i = 0; i <= c.Length - 1; i++)
-            {
-                c[i] = helper[i];
-            }
-*/
-
-
-/*
-            for (int i = 0; i <= a.Length - 1; i++)
-            {
-                if (a[i] <= b[i])
-                {
-                    c[i] = a[i];
-                    c[i + 1] = b[i];
-                }
-                else
-                {
-                    c[i] = b[i];
-                    c[i + 1] = a[i];
-                }
-
-            }
-            */

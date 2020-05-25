@@ -9,9 +9,9 @@ namespace Part3
             Sorting s = new Sorting();
             int[] sortMe = Randomizer(100);
             int[] sortMeLarge = Randomizer(1000000);
-            //s.QuickSort(sortMe);
+            s.QuickSort(sortMe);
             s.MergeSort(sortMe);
-            //s.QuickSort(sortMeLarge);
+            s.QuickSort(sortMeLarge);
             s.MergeSort(sortMeLarge);
         }
         public static int[] Randomizer(int n)
@@ -21,7 +21,7 @@ namespace Part3
             for (int i = 0; i < arr.Length; i++)
             {
                 // integers between 1 and 1000 are enough for us
-                arr[i] = random.Next(1, 1001);
+                arr[i] = random.Next(1, 10000001);
             }
             return arr;
         }
