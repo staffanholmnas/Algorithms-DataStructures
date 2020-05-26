@@ -8,11 +8,9 @@ namespace Part3
         {
             
             // Sorts the array with an Insertion sort algorithm. 
-            // C# built-in method (Array.Sort(t);) would also work, it uses Quicksort I believe.
             InsertionSort(t);
 
-            // Works with numbers -1000 to 1000.
-            int smallestDiff = 2000, diff = 0;
+            int smallestDiff = 10000001, diff = 0;
 
             if (t.Length == 1)
             {
