@@ -1,10 +1,9 @@
-using System.Collections.Generic;
 
 namespace Part4
 {
-    
     public class LinkedList
     {
+
         public Node node;
 
         public LinkedList()
@@ -14,8 +13,8 @@ namespace Part4
 
         public void AddFirst(int n)
         {
-           this.node.value = n;
-           
+            this.node.value = n;
+            
         }
         public void AddLast(int n)
         {
@@ -37,6 +36,7 @@ namespace Part4
         public override string ToString()
         {
             
+
             return this.node.value.ToString();
         }
     }
