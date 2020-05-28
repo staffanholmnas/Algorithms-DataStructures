@@ -4,7 +4,7 @@ namespace Part4
     {
         public int[] Create(int[] a, int[] b)
         {
-            
+            return a;
         }
     }
 }
