@@ -4,7 +4,7 @@ namespace Part4
     {
         public int Last(int n)
         {
-            
+            return 0;
         }
     }
 }
