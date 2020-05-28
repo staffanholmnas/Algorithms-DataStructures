@@ -8,7 +8,7 @@ namespace Part4
         }
         public int Height()
         {
-            
+            return 0;
         }
     }
 }
