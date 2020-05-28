@@ -9,7 +9,7 @@ namespace Part4
 
         public int Calculate()
         {
-            
+            return 0;
         }
     }
 }
