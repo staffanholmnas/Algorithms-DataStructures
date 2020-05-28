@@ -27,7 +27,7 @@ namespace Part4
         public void printNodes()
         {
             Node current = this.head;
-            while (current!= null)
+            while (current != null)
             {
                 Console.WriteLine(current.value);
                 current = current.next;
@@ -50,14 +50,58 @@ namespace Part4
             lastNode.next = newNode;
             newNode.previous = lastNode;
         }
-        
+
         public void RemoveFirst()
         {
+            if (this.head == null)
+            {
+                return;
+            }
 
+            Node deleteMe = this.head;
+
+            if (deleteMe.next == null && deleteMe.previous == null)
+            {
+                this.head = null;
+            }
+            else
+            {
+                while (deleteMe != null)
+                {
+                    if (deleteMe.previous == null)
+                    {
+                        this.head = deleteMe.next;
+                    }
+                    deleteMe = deleteMe.next;
+                }
+                this.head.previous = null;
+            }
         }
         public void RemoveLast()
         {
+            {
+                if (this.head == null)
+                {
+                    return;
+                }
 
+                Node deleteLast = this.head;
+
+                if (deleteLast.next == null && deleteLast.previous == null)
+                {
+                    this.head = null;
+                }
+                
+                while (deleteLast.next != null)
+                {
+                    deleteLast = deleteLast.next;
+                }
+                if (deleteLast.previous != null)
+                {
+                    deleteLast = deleteLast.previous;
+                    deleteLast.next = null;
+                }
+            }
         }
         public void GetNode(int x)
         {
@@ -68,7 +112,7 @@ namespace Part4
         {
             int count = 0;
             Node current = this.head;
-            while (current!= null)
+            while (current != null)
             {
                 count++;
                 current = current.next;
@@ -76,13 +120,13 @@ namespace Part4
             string[] allValues = new string[count];
             current = this.head;
             int index = 0;
-            while (current!= null)
+            while (current != null)
             {
                 allValues[index] = current.value.ToString();
                 current = current.next;
                 index++;
             }
-            
+
             string stringOfValues = String.Join(", ", allValues);
             return stringOfValues;
         }
