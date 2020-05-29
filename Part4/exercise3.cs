@@ -20,7 +20,7 @@ namespace Part4
         {
             list.Sort();
             int smallestDiff = 1000000000, diff = 0;
-            if (list.Count == 1)
+            if (list.Count == 1 || list.Count == 0)
             {
                 return 0;
             }
