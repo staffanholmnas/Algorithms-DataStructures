@@ -4,7 +4,7 @@ namespace Part4
 {
     public class LinkedList
     {
-        // Disclaimer, I used this article for ideas on how to do this exercise: 
+        // I used this article as a guide and got ideas on how to start doing this exercise: 
         // https://www.c-sharpcorner.com/article/linked-list-implementation-in-c-sharp/
         public Node head;
 
@@ -24,6 +24,7 @@ namespace Part4
             }
             this.head = newNode;
         }
+        // printNodes() was used for troubleshooting.
         public void printNodes()
         {
             Node current = this.head;
@@ -103,9 +104,44 @@ namespace Part4
                 }
             }
         }
-        public void GetNode(int x)
+        public int GetNode(int x)
         {
+            if (x < 0)
+            {
+                return 0;
+            }
 
+            Node tempNode = this.head;
+
+            if (tempNode == null)
+            {
+                return 0;
+            }
+            
+            int index = 0;
+
+            while (tempNode != null)
+            {
+                tempNode = tempNode.next;
+                index++;
+            } 
+            if (x >= index)
+            {
+                return 0;
+            }
+
+            tempNode = this.head;
+            index = 0;
+            while (tempNode != null)
+            {
+                if (index == x)
+                {
+                    break;
+                }
+                tempNode = tempNode.next;
+                index++;
+            } 
+            return tempNode.value;
         }
 
         public override string ToString()
