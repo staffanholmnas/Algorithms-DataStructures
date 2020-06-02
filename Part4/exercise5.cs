@@ -16,7 +16,6 @@ namespace Part4
         // wanted the variable names to be left and right instead of previous and next.
         public void Add(int x)
         {
-
             BNode newNode = new BNode();
             newNode.value = x;
 
@@ -55,37 +54,6 @@ namespace Part4
             }
         }
 
-        // SearchNode is useful when I want to find the level or a position of a value. 
-        // I used it for fixing bugs and help me understand the code. 
-        public void SearchNode(int value)
-        {
-            BNode current = this.root;
-            Search(current, value);
-        }
-
-        public BNode Search(BNode node, int value)
-        {
-            Console.WriteLine(node.value);
-            if (node == null)
-            {
-
-                return null;
-            }
-            if (node.value == value)
-            {
-                return node;
-            }
-            if (value < node.value)
-            {
-
-                return Search(node.left, value);
-            }
-            else
-            {
-                return Search(node.right, value);
-            }
-        }
-
         public int Height()
         {
             BNode current = this.root;
@@ -110,7 +78,7 @@ namespace Part4
             }
         }
 
-        // I used printNodes for troubleshooting as well...
+        // I used printNodes for troubleshooting.
         public void printNodes()
         {
             BNode current = this.root;
@@ -124,7 +92,7 @@ namespace Part4
             {
                 Console.WriteLine(parent.value);
                 printAllNodes(parent.left);
-                printAllNodes(parent.right);
+                printAllNodes(parent.right); 
             }
         }
 
