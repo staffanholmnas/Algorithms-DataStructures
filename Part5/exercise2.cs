@@ -35,7 +35,6 @@ namespace Part5
 
             foreach (bool item in visited)
             {
-                Console.WriteLine(item);
                 if (item == true)
                 {
                     sum++;
