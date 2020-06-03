@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using System;
 
 namespace Part5
 {
@@ -26,7 +27,7 @@ namespace Part5
         }
         public int Calculate(int x)
         {
-            bool[] visited = new bool[n + 1];
+            bool[] visited = new bool[n];
 
             Search(x, visited);
 
@@ -34,22 +35,22 @@ namespace Part5
 
             foreach (bool item in visited)
             {
+                Console.WriteLine(item);
                 if (item == true)
                 {
                     sum++;
                 }
             }
             return sum - 1; // The node has visited itself, but we don't count this, so 1 is subtracted. 
-
         }
         public void Search(int x, bool[] visited)
         {
-            if (visited[x] == true)
+            if (visited[x - 1] == true)
             {
                 return;
             }
 
-            visited[x] = true;
+            visited[x - 1] = true;
 
             foreach (int i in graph[x])
             {
