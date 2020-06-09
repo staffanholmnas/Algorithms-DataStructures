@@ -167,7 +167,7 @@ namespace Part5
             int[] columns = { 0, -1, 1, 0 };
             string[] direction = { "U", "L", "R", "D" };
             Queue<QNode> queue = new Queue<QNode>();
-            QNode node = new QNode(root, 0); // Distance is zero.
+            QNode node = new QNode(root, 0); 
             queue.Enqueue(node);
 
             while (queue.Count != 0)
