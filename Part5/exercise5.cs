@@ -11,6 +11,7 @@ namespace Part5
             // Returns directions for a correct path to the distination, but not necessarily the shortest. 
             // The distance is always the shortest, however, since BFS is used.
             // I could not combine these two to return directions for a correct shortest path.
+            // Will try to fix it later by adding previousX[,] and previousY[,] like Heikki did...
 
             int n = laby.GetLength(0); // Amount of rows.
             int m = laby.GetLength(1); // Amount of columns.
