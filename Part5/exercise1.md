@@ -4,4 +4,4 @@
 4. Both
 5. Both
 6. Both
-7. Only DFS
+7. Only BFS
