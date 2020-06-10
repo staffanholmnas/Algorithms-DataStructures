@@ -4,4 +4,4 @@
 4. Both
 5. Both
 6. Both
-7. Only BFS
+7. Only BFS (edited after deadline).
