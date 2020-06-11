@@ -20,6 +20,7 @@ namespace Exercise1
         }
         public int Calculate(int x, int y)
         {
+            // Bellman-Ford's algorithm.
             int[] distance = new int[n + 1];
             for (int i = 0; i < distance.Length; i++) distance[i] = int.MaxValue;
             distance[x] = 0;
