@@ -1,5 +1,4 @@
 using System.Text;
-using System;
 using System.Collections.Generic;
 
 namespace Part5
@@ -8,128 +7,200 @@ namespace Part5
     {
         public string Search(char[,] laby)
         {
-            // Returns directions for a correct path to the distination, but not necessarily the shortest. 
-            // The distance is always the shortest, however, since BFS is used.
-            // I could not combine these two to return directions for a correct shortest path.
-            // Will try to fix it later by adding previousX[,] and previousY[,] like Heikki did...
-
+            // Finds the shortest path using BFS and prints the directions and the distance. Commented out code 
+            // finds the shortest path using node objects instead, but doesn't print directions.
+            
             int n = laby.GetLength(0); // Amount of rows.
             int m = laby.GetLength(1); // Amount of columns.
+            int startY = 0;
+            int startX = 0;
+            int endY = 0;
+            int endX = 0;
+            for (int i = 0; i < n; i++)
+            {
+                for (int j = 0; j < m; j++)
+                {
+                    if (laby[i, j] == 'x')
+                    {
+                        startY = i;
+                        startX = j;
+                    }
+                    if (laby[i, j] == 'y')
+                    {
+                        endY = i;
+                        endX = j;
+                    }
+                }
+            }
+
+            bool[,] visited = new bool[n, m];
+            int[] rows = { -1, 0, 0, 1 };
+            int[] columns = { 0, -1, 1, 0 };
             StringBuilder route = new StringBuilder("", n * m);
-            Position root = new Position(1, 1); // Start position.
-            Position destination = new Position(1, 4); // End position.
+            Queue<int> queueX = new Queue<int>();
+            Queue<int> queueY = new Queue<int>();
+            int[,] previousX = new int[n, m];
+            int[,] previousY = new int[n, m];
+
+            previousX[startY, startX] = -1;
+
+            visited[startY, startX] = true;
+            queueY.Enqueue(startY);
+            queueX.Enqueue(startX);
+
+            while (queueX.Count != 0)
+            {
+                int currentY = queueY.Dequeue();
+                int currentX = queueX.Dequeue();
+
+                // Up
+                int neighborY = currentY - 1;
+                int neighborX = currentX;
+                if (!visited[neighborY, neighborX] && laby[neighborY, neighborX] != '#')
+                {
+                    visited[neighborY, neighborX] = true;
+                    previousY[neighborY, neighborX] = currentY;
+                    previousX[neighborY, neighborX] = currentX;
+                    queueX.Enqueue(neighborX);
+                    queueY.Enqueue(neighborY);
+                }
+
+                // Down
+                neighborY = currentY + 1;
+                if (!visited[neighborY, neighborX] && laby[neighborY, neighborX] != '#')
+                {
+                    visited[neighborY, neighborX] = true;
+                    previousY[neighborY, neighborX] = currentY;
+                    previousX[neighborY, neighborX] = currentX;
+                    queueX.Enqueue(neighborX);
+                    queueY.Enqueue(neighborY);
+                }
+
+                // Left
+                neighborY = currentY;
+                neighborX = currentX - 1;
+                if (!visited[neighborY, neighborX] && laby[neighborY, neighborX] != '#')
+                {
+                    visited[neighborY, neighborX] = true;
+                    previousY[neighborY, neighborX] = currentY;
+                    previousX[neighborY, neighborX] = currentX;
+                    queueX.Enqueue(neighborX);
+                    queueY.Enqueue(neighborY);
+                }
+
+                // Right
+                neighborX = currentX + 1;
+                if (!visited[neighborY, neighborX] && laby[neighborY, neighborX] != '#')
+                {
+                    visited[neighborY, neighborX] = true;
+                    previousY[neighborY, neighborX] = currentY;
+                    previousX[neighborY, neighborX] = currentX;
+                    queueX.Enqueue(neighborX);
+                    queueY.Enqueue(neighborY);
+                }
+            }
+
+            if (!visited[endY, endX])
+            {
+                return "Cannot find a path!";
+            }
+
+            int y = endY;
+            int x = endX;
+            int dist = 0;
+
+            while (previousX[y, x] != -1)
+            {
+                if (previousY[y, x] == y - 1)
+                {
+                    route.Insert(0, "D");
+                    dist++;
+                }
+                else if (previousY[y, x] == y + 1)
+                {
+                    route.Insert(0, "U");
+                    dist++;
+                }
+                else if (previousX[y, x] == x - 1)
+                {
+                    route.Insert(0, "R");
+                    dist++;
+                }
+                else
+                {
+                    route.Insert(0, "L");
+                    dist++;
+                }
+                int swap = y;
+                y = previousY[y, x];
+                x = previousX[swap, x];
+            }
+
+            return route.ToString() + "\nShortest distance is " + dist.ToString();
+            
+            // ---------------------------------------------------
+            // BFS, finds the shortest distance using nodes and a neater code, but doesn't print directions.
+
+            /*       
+            int n = laby.GetLength(0); // Amount of rows.
+            int m = laby.GetLength(1); // Amount of columns.
+            int startY = 0;
+            int startX = 0;
+            int endY = 0;
+            int endX = 0;
+            for (int i = 0; i < n; i++)
+            {
+                for (int j = 0; j < m; j++)
+                {
+                    if (laby[i, j] == 'x')
+                    {
+                        startY = i;
+                        startX = j;
+                    }
+                    if (laby[i, j] == 'y')
+                    {
+                        endY = i;
+                        endX = j;
+                    }
+                }
+            }
+            Position root = new Position(startY, startX); // Start position.
+            Position destination = new Position(endY, endX); // End position.
             bool[,] visited = new bool[n, m];
             visited[root.x, root.y] = true;
             int[] rows = { -1, 0, 0, 1 };
             int[] columns = { 0, -1, 1, 0 };
-            string[] direction = { "U", "L", "R", "D" };
             Queue<QNode> queue = new Queue<QNode>();
-            QNode node = new QNode(root, 0); // Distance is zero.
+            QNode node = new QNode(root, 0); 
             queue.Enqueue(node);
-
-            int dist = ShortestDistance(laby, n, m, route, destination, visited, rows, columns, queue, node, direction);
-
-            Queue<QNode> queue2 = new Queue<QNode>();
-            QNode node2 = new QNode(root, 0); // Distance is zero.
-            queue2.Enqueue(node2);
-            bool[,] visited2 = new bool[n, m];
-            visited2[root.x, root.y] = true;
-
-            string path = PrintPath(laby, n, m, route, destination, visited2, queue2, node2);
-
-            return path + "\nThe shortest distance is " + dist;
-        }
-        public int ShortestDistance(char[,] laby, int n, int m, StringBuilder route, Position destination,
-        bool[,] visited, int[] rows, int[] columns, Queue<QNode> queue, QNode node, String[] direction)
-        {
             while (queue.Count != 0)
             {
                 QNode current = queue.Peek();
                 Position pos = current.pos;
-
                 if (pos.x == destination.x && pos.y == destination.y)
                 {
-                    return current.distance; // Shortest distance.
+                    return current.distance.ToString(); // Shortest distance.
                 }
-
                 queue.Dequeue();
-
                 for (int i = 0; i < 4; i++)
                 {
                     int row = pos.x + rows[i];
                     int col = pos.y + columns[i];
-
-                    if ((row >= 0) && (row <= n) && (col >= 0) && (col <= m)
+                    if ((row >= 0) && (row <= n) && (col >= 0) && (col <= m) 
                     && !visited[row, col] && laby[row, col] != '#')
                     {
                         visited[row, col] = true;
                         Position newPos = new Position(row, col);
                         QNode neighbor = new QNode(newPos, current.distance + 1);
                         queue.Enqueue(neighbor);
-                        // route.Append(direction[i]);  -Doesn't always work. Adds too many directions for longer paths.
                     }
                 }
             }
-
-            return 0;
-        }
-        public string PrintPath(char[,] laby, int n, int m, StringBuilder route, Position destination,
-        bool[,] visited, Queue<QNode> queue, QNode node)
-        {
-            while (queue.Count != 0)
-            {
-                QNode current = queue.Peek();
-                Position pos = current.pos;
-
-                if (pos.x == destination.x && pos.y == destination.y)
-                {
-                    return route.ToString(); // Path
-                }
-
-                queue.Dequeue();
-
-                if ((pos.x - 1 >= 0) && (pos.x - 1 <= n) && (pos.y >= 0) && (pos.y <= m) && laby[pos.x - 1, pos.y] != '#'
-                && !visited[pos.x - 1, pos.y])
-                {
-                    Position newPos = new Position(pos.x - 1, pos.y);
-                    QNode neighbor = new QNode(newPos, current.distance + 1);
-                    queue.Enqueue(neighbor);
-                    visited[pos.x - 1, pos.y] = true;
-                    route.Append("U");
-                }
-                else if ((pos.x >= 0) && (pos.x <= n) && (pos.y + 1 >= 0) && (pos.y + 1 <= m) && laby[pos.x, pos.y + 1] != '#'
-                && !visited[pos.x, pos.y + 1])
-                {
-                    Position newPos = new Position(pos.x, pos.y + 1);
-                    QNode neighbor = new QNode(newPos, current.distance + 1);
-                    queue.Enqueue(neighbor);
-                    visited[pos.x, pos.y + 1] = true;
-                    route.Append("R");
-                }
-                else if ((pos.x >= 0) && (pos.x <= n) && (pos.y - 1 >= 0) && (pos.y - 1 <= m) && laby[pos.x, pos.y - 1] != '#'
-                && !visited[pos.x, pos.y - 1])
-                {
-                    Position newPos = new Position(pos.x, pos.y - 1);
-                    QNode neighbor = new QNode(newPos, current.distance + 1);
-                    queue.Enqueue(neighbor);
-                    visited[pos.x, pos.y - 1] = true;
-                    route.Append("L");
-                }
-
-                else if ((pos.x + 1 >= 0) && (pos.x + 1 <= n) && (pos.y >= 0) && (pos.y <= m) && laby[pos.x + 1, pos.y] != '#'
-                && !visited[pos.x + 1, pos.y])
-                {
-                    Position newPos = new Position(pos.x + 1, pos.y);
-                    QNode neighbor = new QNode(newPos, current.distance + 1);
-                    queue.Enqueue(neighbor);
-                    visited[pos.x + 1, pos.y] = true;
-                    route.Append("D");
-                }
-            }
-
             return "Cannot be found";
+            */
         }
     }
+    
     public class Position
     {
         public int x;
@@ -153,51 +224,3 @@ namespace Part5
         }
     }
 }
-
-// ---------------------------------------------------
-// BFS, finds the shortest path, but prints the directions incorrectly...
-/*
-            int n = laby.GetLength(0); // Amount of rows.
-            int m = laby.GetLength(1); // Amount of columns.
-            StringBuilder route = new StringBuilder("", n * m);
-            Position root = new Position(1, 1); // Start position.
-            Position destination = new Position(3, 5); // End position.
-            bool[,] visited = new bool[n, m];
-            visited[root.x, root.y] = true;
-            int[] rows = { -1, 0, 0, 1 };
-            int[] columns = { 0, -1, 1, 0 };
-            string[] direction = { "U", "L", "R", "D" };
-            Queue<QNode> queue = new Queue<QNode>();
-            QNode node = new QNode(root, 0); 
-            queue.Enqueue(node);
-
-            while (queue.Count != 0)
-            {
-                QNode current = queue.Peek();
-                Position pos = current.pos;
-
-                if (pos.x == destination.x && pos.y == destination.y)
-                {
-                    return route.ToString(); // current.distance.ToString();
-                }
-
-                queue.Dequeue();
-
-                for (int i = 0; i < 4; i++)
-                {
-                    int row = pos.x + rows[i];
-                    int col = pos.y + columns[i];
-
-                    if ((row >= 0) && (row <= n) && (col >= 0) && (col <= m) 
-                    && !visited[row, col] && laby[row, col] != '#')
-                    {
-                        visited[row, col] = true;
-                        Position newPos = new Position(row, col);
-                        QNode neighbor = new QNode(newPos, current.distance + 1);
-                        queue.Enqueue(neighbor);
-                        route.Append(direction[i]);
-                    }
-                }
-            }
-            return "Cannot be found";
-            */
