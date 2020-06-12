@@ -13,7 +13,7 @@ namespace Part5
             {'#','.','#','.','#','.','#'},
             {'#','.','.','.','.','.','#'},
             {'#','#','#','#','#','#','#'} };
-            Console.WriteLine(l.Search(c)); // DDRRUUR
+            Console.WriteLine(l.Search(c)); // DDRRUUR Shortest distance is 7
         }
     }
 }
