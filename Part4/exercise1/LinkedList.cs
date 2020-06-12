@@ -1,4 +1,5 @@
 using System;
+using System.Text;
 
 namespace Part4
 {
@@ -146,25 +147,14 @@ namespace Part4
 
         public override string ToString()
         {
-            int count = 0;
+            StringBuilder total = new StringBuilder();
             Node current = this.head;
-            while (current != null)
+            while(current != null)
             {
-                count++;
-                current = current.next;
+                total.Append(current.value + " ");
+                current = current.next; 
             }
-            string[] allValues = new string[count];
-            current = this.head;
-            int index = 0;
-            while (current != null)
-            {
-                allValues[index] = current.value.ToString();
-                current = current.next;
-                index++;
-            }
-
-            string stringOfValues = String.Join(", ", allValues);
-            return stringOfValues;
+            return total.ToString();
         }
     }
 }
