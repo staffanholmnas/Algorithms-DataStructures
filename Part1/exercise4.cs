@@ -1,13 +1,16 @@
 namespace Part1
 {
     using System;
+    using System.Collections.Generic;
     public class LuckyNumbers
     {
         public int Calculate(int a, int b)
         {
             DateTime start = DateTime.Now;
-
             Console.WriteLine("------------------------------");
+
+            /*
+            // Commented out calling my VERY complicated methods. Added teacher Heikki's excellent method CountNumbers(). 
 
             int sumA = 0;
             int sumB = 0;
@@ -35,11 +38,13 @@ namespace Part1
             sumA = GetNarrowInterval(a, sumA);
 
             total = sumB - sumA;
+            */
+            int efficientSearch = CountNumbers(b) - CountNumbers(a - 1);
 
             DateTime end = DateTime.Now;
             Console.WriteLine("Time elapsed: " + (end.Ticks - start.Ticks) / 10000.0 + " milliseconds");
 
-            return total;
+            return efficientSearch;
 
         }
         public static int GetAlgo(int a)
@@ -85,7 +90,7 @@ namespace Part1
         public static int GetNarrowInterval(int c, int sumC)
         {
             // Creates narrow intervals so that the algorithm above can be used for most numbers.
-            
+
             int number = GetBaseNumber(c);
 
             double number1 = 0;
@@ -132,14 +137,35 @@ namespace Part1
 
                     if (i == 1) // If number is between e.g. 3777 and 7333, caluculate using only algorithms.
                     {
-                        if (c > number2 && c < number1) 
+                        if (c > number2 && c < number1)
                         {
-                            sumC += ((GetAlgo(number * 10)) - (GetAlgo(number))) / 2; 
+                            sumC += ((GetAlgo(number * 10)) - (GetAlgo(number))) / 2;
                         }
                     }
                 }
             }
             return sumC;
+        }
+
+        public static int CountNumbers(int input)
+        {
+            List<int> list = new List<int>();
+            if (input >= 3) list.Add(3);
+            else return 0;
+            if (input >= 7) list.Add(7);
+            else return list.Count;
+            int i = 0;
+            while (true)
+            {
+                int next = list[i] * 10 + 3;
+                int nextAfterThat = list[i] * 10 + 7;
+                if (next > input) break;
+                list.Add(next);
+                if (nextAfterThat > input) break;
+                list.Add(nextAfterThat);
+                i++;   
+            }
+            return list.Count;
         }
     }
 }
