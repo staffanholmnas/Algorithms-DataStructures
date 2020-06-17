@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace Exercise3
+namespace Exercise4
 {
     class Program
     {
@@ -12,7 +12,7 @@ namespace Exercise3
             s.AddRoad(1, 3, 6);
             s.AddRoad(3, 4, 5);
             s.AddRoad(4, 5, 3);
-            Console.WriteLine(s.Calculate(1, 5)); // 12
+            s.Create(1, 5).ForEach(Console.Write); // 1245
         }
     }
 }
