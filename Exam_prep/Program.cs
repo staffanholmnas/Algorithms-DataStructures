@@ -6,15 +6,13 @@ namespace Exam_prep
     {
         static void Main(string[] args)
         {
-            Rooms r = new Rooms();
-            int[,] house = {
-            {1,1,1,1,1,1,1,1},
-            {1,0,1,0,1,0,0,1},
-            {1,1,1,0,1,0,1,1},
-            {1,0,1,0,1,0,0,1},
-            {1,1,1,1,1,1,1,1},
-            };
-            Console.WriteLine(r.Calculate(house)); // 4
+            Flights f = new Flights();
+            f.AddConnection("helsinki", "tampere", 100);
+            f.AddConnection("tampere", "oulu", 100);
+            f.AddConnection("oulu", "vaasa", 100);
+            f.AddConnection("helsinki", "turku", 500);
+            f.AddConnection("turku", "vaasa", 700);
+            Console.WriteLine(f.RoutePrice("helsinki", "vaasa")); // 1200
         }
     }
 }
